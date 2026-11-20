@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phishing Awareness | CodeAlpha</title>
+<style>
+:root{font-family:Inter,Segoe UI,Arial,sans-serif;color:#172033;background:#f3f6fb}
+body{margin:0}.hero{background:linear-gradient(120deg,#102a43,#176b87);color:white;padding:42px 7%}
+.hero h1{font-size:clamp(2rem,5vw,3.3rem);margin:.2em 0}.wrap{max-width:1000px;margin:28px auto;padding:0 18px}
+.card{background:white;border:1px solid #dce5ef;border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 5px 18px #19324a0b}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.tag{display:inline-block;background:#e4f3f7;color:#07566c;padding:5px 10px;border-radius:99px;font-size:.8rem;font-weight:700}
+button{background:#075b78;color:white;border:0;padding:11px 16px;border-radius:9px;cursor:pointer;font-weight:700}
+button:hover{background:#0c7899}.option{display:block;border:1px solid #d5dfeb;border-radius:9px;padding:12px;margin:9px 0;cursor:pointer}
+.option:has(input:checked){border-color:#087b9b;background:#eef9fb}
+.result{font-weight:700;margin-top:12px}.muted{color:#607086}footer{padding:24px;text-align:center;color:#64748b}
+</style></head>
+<body>
+<header class="hero"><span class="tag">CODEALPHA • CYBERSECURITY</span><h1>Pause. Inspect. Report.</h1>
+<p>Practical phishing awareness: recognize social engineering before it becomes an incident.</p></header>
+<main class="wrap">
+<section class="card"><h2>What is phishing?</h2><p>Phishing is a form of social engineering in which an attacker impersonates a trusted person or organization to persuade someone to reveal information, open a harmful attachment, approve a request, or visit a deceptive site.</p>
+<div class="grid"><div><h3>Look at the sender</h3><p>Check the complete address, not just the display name. Watch for misspellings and unrelated domains.</p></div><div><h3>Inspect the destination</h3><p>Hover over links on desktop or use the link-preview feature. Navigate to known services using a saved bookmark.</p></div><div><h3>Question urgency</h3><p>Threats, secrecy, unexpected rewards, and pressure to act immediately are common manipulation tactics.</p></div></div></section>
+<section class="card"><h2>Fictional example: account warning</h2><p><b>From:</b> IT Helpdesk &lt;support@it-helpdesk.example&gt;</p><p><b>Subject:</b> Immediate action required — mailbox closure</p><p>Your mailbox will be disabled in 30 minutes. Open the attached file and sign in to confirm your password.</p>
+<p class="muted"><b>Warning signs:</b> unexpected threat, artificial deadline, password request, attachment, and sender domain that may not match the real organization. The reserved <code>.example</code> domain is used for training.</p></section>
+<section class="card"><h2>Common social-engineering tactics</h2><ul><li><b>Authority:</b> pretending to be an executive, bank, or IT administrator.</li><li><b>Fear and urgency:</b> claiming an account or payment will be blocked.</li><li><b>Curiosity:</b> using unexpected documents, invoices, or shared files.</li><li><b>Reciprocity or reward:</b> offering a prize or benefit in exchange for action.</li><li><b>Business email compromise:</b> impersonating a colleague or supplier to change payment details.</li></ul></section>
+<section class="card"><h2>Best practices</h2><ol><li>Verify unusual requests using a separate, trusted channel.</li><li>Do not enter passwords after following an unexpected email link.</li><li>Use multifactor authentication and a password manager.</li><li>Keep browsers, operating systems, and endpoint protection updated.</li><li>Report suspicious messages; do not forward them broadly.</li><li>If you clicked, report promptly, change affected credentials through the official site, and follow incident-response guidance.</li></ol></section>
+<section class="card"><h2>Knowledge check</h2><p class="muted">Choose one answer per question, then submit.</p><form id="quiz"></form><button id="submit">Check answers</button><p id="score" class="result" aria-live="polite"></p></section>
+</main><footer>Educational material • Use your organization's official reporting process.</footer>
+<script>
+const questions=[
+{q:"An unexpected email says your account closes in 15 minutes and asks you to sign in through a link. What should you do?",a:["Click quickly to avoid closure","Open the known official site separately and report the email","Reply with your password"],c:1,e:"Avoid the supplied link. Verify through a known official channel and report it."},
+{q:"Which sender detail is most useful to inspect?",a:["Display name only","Complete email address and domain","Logo in the signature"],c:1,e:"Display names and logos can be copied; inspect the full address and domain."},
+{q:"A supplier emails new bank details. What is safest?",a:["Pay immediately","Reply to the same email","Verify using a previously known phone number or contact"],c:2,e:"Payment changes require independent verification through a trusted channel."},
+{q:"You clicked a suspicious link and entered your password. What next?",a:["Ignore it","Report immediately and change the password through the official site","Delete the email and say nothing"],c:1,e:"Prompt reporting allows containment. Change credentials using the genuine service and follow policy."}
+];
+const form=document.getElementById("quiz");
+questions.forEach((q,i)=>{let box=document.createElement("fieldset");box.className="card";let legend=document.createElement("legend");legend.textContent=(i+1)+". "+q.q;box.appendChild(legend);q.a.forEach((a,j)=>{let label=document.createElement("label");label.className="option";let input=document.createElement("input");input.type="radio";input.name="q"+i;input.value=j;label.append(input," "+a);box.appendChild(label)});form.appendChild(box)});
+document.getElementById("submit").addEventListener("click",()=>{let score=0,details=[];questions.forEach((q,i)=>{let v=form.querySelector('input[name="q'+i+'"]:checked');if(v&&Number(v.value)===q.c)score++;details.push((i+1)+". "+q.e)});document.getElementById("score").textContent="Score: "+score+"/"+questions.length+". "+details.join(" ");});
+</script></body></html>
